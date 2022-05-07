@@ -5,10 +5,10 @@ const double paddingStandard = 20;
 const double marginStandard = 20;
 
 //Light Theme
-const Color lightPrimary = Color(0xff673AB7);
-const Color lightPrimaryLight = Color(0xffD1C4E9);
-const Color lightPrimaryDark = Color(0xff512DA8);
-const Color lightAsscentColor = Color(0xffFF9800);
+const Color lightPrimary = Color(0xff03A9F4);
+const Color lightPrimaryLight = Color(0xffB3E5FC);
+const Color lightPrimaryDark = Color(0xff0288D1);
+const Color lightAsscentColor = Color(0xff536DFE);
 
 final TextTheme lightTextTheme = ThemeData.light().textTheme.copyWith(
       headline3:

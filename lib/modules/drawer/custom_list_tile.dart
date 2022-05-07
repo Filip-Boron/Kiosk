@@ -18,7 +18,10 @@ class CustomListTitle extends StatelessWidget {
       width: 300,
       height: 80,
       child: ListTile(
-        leading: Icon(icon),
+        leading: Icon(
+          icon,
+          color: Theme.of(context).colorScheme.secondary,
+        ),
         title: Text(
           title,
           style: Theme.of(context).textTheme.headline4,

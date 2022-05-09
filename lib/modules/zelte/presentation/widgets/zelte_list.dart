@@ -7,7 +7,7 @@ class ZelteList extends StatelessWidget {
       : super(key: key);
 
   final List<Zelt> zeltList;
-  final Function(int) editAction;
+  final Function(int, BuildContext) editAction;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ZelteList extends StatelessWidget {
         return Card(
           margin: const EdgeInsets.symmetric(
             horizontal: marginStandard,
-            vertical: 4,
+            vertical: 8,
           ),
           elevation: 4,
           child: ListTile(
@@ -24,6 +24,7 @@ class ZelteList extends StatelessWidget {
             leading: Icon(
               Icons.cabin,
               color: Theme.of(context).colorScheme.secondary,
+              size: iconSizeStandard,
             ),
             title: Text(
               zeltList[index].bezeichnung,
@@ -43,7 +44,7 @@ class ZelteList extends StatelessWidget {
                 size: iconSizeStandard,
               ),
               onPressed: () {
-                editAction(index);
+                editAction(index, context);
               },
             ),
           ),

@@ -5,7 +5,7 @@ class Zelt {
     bezeichnung = 'Zelt $nummer';
   }
 
-  final int nummer;
+  int nummer;
   String bezeichnung = '';
   int kinderAnzahl;
 
@@ -18,6 +18,15 @@ class Zelt {
       return;
     }
     kinderAnzahl--;
+  }
+
+  void setZeltnummer(int zeltnummer) {
+    nummer = zeltnummer;
+    bezeichnung = 'Zelt $nummer';
+  }
+
+  static Zelt copy(Zelt zelt) {
+    return Zelt(nummer: zelt.nummer, kinderAnzahl: zelt.kinderAnzahl);
   }
 
   static Zelt fromJson(Map<String, dynamic> json) {

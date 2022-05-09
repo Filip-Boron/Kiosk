@@ -15,7 +15,7 @@ abstract class ZelteState extends Equatable {
 }
 
 class ZelteInitial extends ZelteState {
-  ZelteInitial({List<Zelt> zelteList = const []}) : super(zelteList: zelteList);
+  ZelteInitial({required List<Zelt> zelteList}) : super(zelteList: zelteList);
 }
 
 class ZelteLoading extends ZelteState {

@@ -25,6 +25,9 @@ linter:
     public_member_api_docs: false
     sort_pub_dependencies: false
     prefer_const_literals_to_create_immutables: false
+    prefer_constructors_over_static_methods: false
+    must_be_immutable: false
+    sized_box_for_whitespace: false
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

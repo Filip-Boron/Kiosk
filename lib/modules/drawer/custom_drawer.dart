@@ -3,6 +3,7 @@ import 'package:kiosk/constants/app_constants.dart';
 import 'package:kiosk/modules/drawer/custom_drawer_header.dart';
 import 'package:kiosk/modules/drawer/custom_list_tile.dart';
 import 'package:kiosk/modules/shop/presentation/screens/shop_screen.dart';
+import 'package:kiosk/modules/zelte/presentation/zelte_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -38,9 +39,9 @@ class CustomDrawer extends StatelessWidget {
                 route: ShopScreen.routeName,
               ),
               const CustomListTitle(
-                icon: Icons.add_business,
+                icon: Icons.cabin,
                 title: 'Zelte',
-                route: ShopScreen.routeName,
+                route: ZelteScreen.routeName,
               ),
               const CustomListTitle(
                 icon: Icons.account_circle,

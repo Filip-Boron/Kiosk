@@ -10,7 +10,7 @@ class ShopScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shop'),
+        title: const Text('Kiosk'),
       ),
       drawer: const CustomDrawer(),
       body: const Text(''),

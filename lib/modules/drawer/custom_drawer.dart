@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kiosk/constants/app_constants.dart';
 import 'package:kiosk/modules/drawer/custom_drawer_header.dart';
 import 'package:kiosk/modules/drawer/custom_list_tile.dart';
+import 'package:kiosk/modules/kinder/presentation/kinder_screen.dart';
 import 'package:kiosk/modules/shop/presentation/screens/shop_screen.dart';
 import 'package:kiosk/modules/zelte/presentation/zelte_screen.dart';
 
@@ -46,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
               const CustomListTitle(
                 icon: Icons.account_circle,
                 title: 'Kinder',
-                route: ShopScreen.routeName,
+                route: KinderScreen.routeName,
               ),
               const CustomListTitle(
                 icon: Icons.add_shopping_cart,

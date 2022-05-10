@@ -14,7 +14,7 @@ class ZeltDialog extends StatelessWidget {
   Zelt zelt;
   final String titel;
   int? zeltnummer;
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -35,7 +35,7 @@ class ZeltDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Divider(
-            color: Colors.grey.withOpacity(0.83),
+            color: Theme.of(context).colorScheme.secondary.withOpacity(0.83),
             thickness: 1,
           ),
           const SizedBox(

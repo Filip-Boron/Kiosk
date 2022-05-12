@@ -24,3 +24,5 @@ final TextStyle lightAppBarTitel = ThemeData.light()
     .textTheme
     .headline4!
     .copyWith(color: Colors.black, fontSize: 32);
+
+const IconData zeltIcon = Icons.cabin;

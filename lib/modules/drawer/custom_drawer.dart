@@ -40,7 +40,7 @@ class CustomDrawer extends StatelessWidget {
                 route: ShopScreen.routeName,
               ),
               const CustomListTitle(
-                icon: Icons.cabin,
+                icon: zeltIcon,
                 title: 'Zelte',
                 route: ZelteScreen.routeName,
               ),

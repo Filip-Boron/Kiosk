@@ -7,7 +7,16 @@ import 'package:kiosk/modules/zelte/data/zelt.dart';
 import 'package:kiosk/modules/zelte/logic/zelte_cubit.dart';
 
 class KinderFormDialog extends StatelessWidget {
-  KinderFormDialog({Key? key, required this.kind}) : super(key: key);
+  KinderFormDialog({Key? key, required this.kind}) : super(key: key) {
+    _vornameController.text = kind.vorname;
+    _nachnameController.text = kind.nachname;
+    kind.guthaben == null
+        ? _guthabenController.text = ''
+        : _guthabenController.text = kind.guthaben.toString();
+    kind.zelt != null ? _zeltController = kind.zelt : _zeltController = null;
+
+    _kommentarController.text = kind.kommentar ?? '';
+  }
 
   Kind kind;
   bool guthabenIsValid = true;
@@ -15,7 +24,7 @@ class KinderFormDialog extends StatelessWidget {
   final TextEditingController _vornameController = TextEditingController();
   final TextEditingController _nachnameController = TextEditingController();
   final TextEditingController _guthabenController = TextEditingController();
-  final TextEditingController _zeltController = TextEditingController();
+  Zelt? _zeltController;
   final TextEditingController _kommentarController = TextEditingController();
 
   @override
@@ -106,9 +115,11 @@ class KinderFormDialog extends StatelessWidget {
               ),
             ),
             cursorColor: Theme.of(context).colorScheme.secondary,
+            controller: _guthabenController,
             onChanged: (input) {
               if (input.isEmpty) {
                 kind.guthaben = null;
+                return;
               } else if (double.tryParse(input) == null) {
                 Fluttertoast.showToast(
                   msg: 'Das Guthaben darf nur aus Zahlen bestehen.',
@@ -126,7 +137,7 @@ class KinderFormDialog extends StatelessWidget {
           ),
           DropdownButtonFormField(
             decoration: InputDecoration(
-              labelText: 'Guthaben',
+              labelText: 'Zelt',
               enabledBorder: OutlineInputBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
                 borderSide:
@@ -139,6 +150,7 @@ class KinderFormDialog extends StatelessWidget {
               ),
             ),
             hint: const Text('Zelt auswählen'),
+            value: _zeltController,
             items: context
                 .read<ZelteCubit>()
                 .state
@@ -160,7 +172,7 @@ class KinderFormDialog extends StatelessWidget {
             height: marginStandard,
           ),
           Container(
-            width: 400,
+            width: MediaQuery.of(context).size.width * 0.5,
             child: TextField(
               decoration: InputDecoration(
                 labelText: 'Kommentar',
@@ -172,6 +184,7 @@ class KinderFormDialog extends StatelessWidget {
                 ),
               ),
               cursorColor: Theme.of(context).colorScheme.secondary,
+              controller: _kommentarController,
               minLines: 1,
               maxLines: null,
               style: Theme.of(context).textTheme.headline6,

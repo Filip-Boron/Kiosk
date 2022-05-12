@@ -32,8 +32,35 @@ class KinderCubit extends Cubit<KinderState> {
 
     if (kind != null) {
       state.kinderList.add(kind);
-      //TODO: Kinderanzahl beim Zelt hoch zählen.
+      kind.zelt?.addKind();
     }
+    emit(KinderLoaded(kinderList: state.kinderList));
+  }
+
+  Future editAction(int index, BuildContext context) async {
+    emit(KinderEditing(kinderList: state.kinderList));
+
+    final Kind? editKind = await showDialog(
+      context: context,
+      barrierDismissible: false,
+      useSafeArea: true,
+      builder: (_) {
+        return KinderDialog(
+          titel: 'Kind bearbeiten',
+          kind: Kind.copy(state.kinderList[index]),
+        );
+      },
+    );
+
+    if (editKind != null) {
+      if (editKind.zelt != state.kinderList[index].zelt) {
+        state.kinderList[index].zelt?.subKind();
+        editKind.zelt?.addKind();
+      }
+
+      state.kinderList[index] = Kind.copy(editKind);
+    }
+
     emit(KinderLoaded(kinderList: state.kinderList));
   }
 }

@@ -20,6 +20,15 @@ class Kind {
     this.zelt = Zelt(nummer: zelt.nummer, kinderAnzahl: zelt.kinderAnzahl);
   }
 
+  static Kind copy(Kind kind) {
+    return Kind(
+        vorname: kind.vorname,
+        nachname: kind.nachname,
+        guthaben: kind.guthaben,
+        kommentar: kind.kommentar,
+        zelt: kind.zelt);
+  }
+
   static Kind fromJson(Map<String, dynamic> json) {
     return Kind(
       vorname: json['vorname'] as String,

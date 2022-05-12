@@ -9,12 +9,25 @@ import 'package:kiosk/modules/zelte/presentation/widgets/zelt_dialog.dart';
 class ZelteCubit extends Cubit<ZelteState> {
   ZelteCubit() : super(ZelteInitial(zelteList: []));
 
+  Future<bool> fetchData() async {
+    emit(
+      ZelteLoading(zelteList: state.zelteList),
+    );
+
+    //Fetch Data from Hive
+
+    emit(
+      ZelteLoaded(zelteList: state.zelteList),
+    );
+    return true;
+  }
+
   Future addAction(BuildContext context) async {
     emit(
       ZelteEditing(zelteList: state.zelteList),
     );
 
-    Zelt? zelt = await showDialog<Zelt>(
+    final Zelt? zelt = await showDialog<Zelt>(
       context: context,
       barrierDismissible: false,
       builder: (_) {
@@ -38,9 +51,9 @@ class ZelteCubit extends Cubit<ZelteState> {
       ZelteEditing(zelteList: state.zelteList),
     );
 
-    Zelt editZelt = Zelt.copy(state.zelteList[index]);
+    final Zelt editZelt = Zelt.copy(state.zelteList[index]);
 
-    Zelt? zelt = await showDialog<Zelt>(
+    final Zelt? zelt = await showDialog<Zelt>(
       context: context,
       barrierDismissible: false,
       builder: (_) {

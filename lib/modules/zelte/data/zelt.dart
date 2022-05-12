@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-class Zelt {
+import 'package:equatable/equatable.dart';
+
+class Zelt extends Equatable {
   Zelt({required this.nummer, this.kinderAnzahl = 0}) {
     bezeichnung = 'Zelt $nummer';
   }
@@ -42,4 +44,7 @@ class Zelt {
       'kinderAnzahl': kinderAnzahl,
     });
   }
+
+  @override
+  List<Object?> get props => [nummer];
 }

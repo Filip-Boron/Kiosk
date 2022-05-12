@@ -22,7 +22,7 @@ class ZelteList extends StatelessWidget {
           child: ListTile(
             horizontalTitleGap: marginStandard,
             leading: Icon(
-              Icons.cabin,
+              zeltIcon,
               color: Theme.of(context).colorScheme.secondary,
               size: iconSizeStandard,
             ),

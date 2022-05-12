@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiosk/config/theme.dart';
+import 'package:kiosk/modules/kinder/logic/kinder_cubit.dart';
+import 'package:kiosk/modules/kinder/presentation/kinder_screen.dart';
 import 'package:kiosk/modules/shop/presentation/screens/shop_screen.dart';
 import 'package:kiosk/modules/zelte/logic/zelte_cubit.dart';
 import 'package:kiosk/modules/zelte/presentation/zelte_screen.dart';
@@ -19,7 +21,12 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<ZelteCubit>(
           create: (context) {
-            return ZelteCubit();
+            return ZelteCubit()..fetchData();
+          },
+        ),
+        BlocProvider<KinderCubit>(
+          create: (context) {
+            return KinderCubit()..fetchData();
           },
         )
       ],
@@ -30,6 +37,7 @@ class MyApp extends StatelessWidget {
           '/': (ctx) => const ShopScreen(),
           ShopScreen.routeName: (ctx) => const ShopScreen(),
           ZelteScreen.routeName: (ctx) => const ZelteScreen(),
+          KinderScreen.routeName: (ctx) => const KinderScreen(),
         },
       ),
     );

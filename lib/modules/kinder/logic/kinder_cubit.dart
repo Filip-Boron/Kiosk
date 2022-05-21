@@ -63,4 +63,8 @@ class KinderCubit extends Cubit<KinderState> {
 
     emit(KinderLoaded(kinderList: state.kinderList));
   }
+
+  Kind getKindByIndex(int index) {
+    return state.kinderList[index];
+  }
 }

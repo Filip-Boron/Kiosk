@@ -3,11 +3,16 @@ import 'package:kiosk/constants/app_constants.dart';
 import 'package:kiosk/modules/zelte/data/zelt.dart';
 
 class ZelteList extends StatelessWidget {
-  const ZelteList({Key? key, required this.zeltList, required this.editAction})
-      : super(key: key);
+  const ZelteList({
+    Key? key,
+    required this.zeltList,
+    required this.action,
+    required this.icon,
+  }) : super(key: key);
 
   final List<Zelt> zeltList;
-  final Function(int, BuildContext) editAction;
+  final Function(int, BuildContext) action;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +44,12 @@ class ZelteList extends StatelessWidget {
             ),
             trailing: IconButton(
               icon: Icon(
-                Icons.edit,
+                icon,
                 color: Theme.of(context).colorScheme.secondary,
                 size: iconSizeStandard,
               ),
               onPressed: () {
-                editAction(index, context);
+                action(index, context);
               },
             ),
           ),

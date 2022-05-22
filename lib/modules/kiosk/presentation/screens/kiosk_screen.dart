@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kiosk/constants/app_constants.dart';
 import 'package:kiosk/modules/drawer/custom_drawer.dart';
 import 'package:kiosk/modules/kiosk/logic/kiosk_cubit.dart';
 import 'package:kiosk/modules/kiosk/logic/kiosk_state.dart';
@@ -22,35 +21,28 @@ class KioskScreen extends StatelessWidget {
             title: const Text('Kiosk'),
           ),
           drawer: const CustomDrawer(),
-          body: BlocListener<ZelteCubit, ZelteState>(
-            listener: (context, state) {
-              if (state.status.isLoaded || state.status.isEmpty) {
-                context.read<KioskCubit>().dataLoaded();
+          body: BlocBuilder<KioskCubit, KioskState>(
+            builder: (context, state) {
+              if (state.status.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state.status.isLoaded) {
+                return ZelteList(
+                  icon: Icons.arrow_forward,
+                  zeltList: context.read<ZelteCubit>().state.zelteList,
+                  action: context.read<KioskCubit>().auswahlAction,
+                );
+              } else if (state.status.isEmpty) {
+                return const Center(
+                  child: Text('keine Zelte vorhanden.'),
+                );
+              } else {
+                return const Center(
+                  child: Text('etwas ist schief gelaufen ..'),
+                );
               }
             },
-            child: BlocBuilder<KioskCubit, KioskState>(
-              builder: (context, state) {
-                if (state.status.isLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state.status.isLoaded) {
-                  return ZelteList(
-                    icon: Icons.arrow_right_alt,
-                    zeltList: context.read<ZelteCubit>().state.zelteList,
-                    action: context.read<KioskCubit>().auswahlAction,
-                  );
-                } else if (state.status.isEmpty) {
-                  return const Center(
-                    child: Text('keine Zelte vorhanden.'),
-                  );
-                } else {
-                  return const Center(
-                    child: Text('etwas ist schief gelaufen ..'),
-                  );
-                }
-              },
-            ),
           ),
         );
       },

@@ -24,7 +24,7 @@ class KioskKinderCubit extends Cubit<KioskKinderState> {
         .read<KinderCubit>()
         .state
         .kinderList
-        .where((kind) => kind.zelt!.nummer == zelt.nummer)
+        .where((kind) => kind.zelt?.nummer == zelt.nummer)
         .toList();
 
     emit(state.copyWith(
@@ -34,10 +34,19 @@ class KioskKinderCubit extends Cubit<KioskKinderState> {
     ));
   }
 
+  void updateView() {
+    emit(state.copyWith(status: KioskKinderStatus.loading));
+    emit(state.copyWith(status: KioskKinderStatus.loaded));
+  }
+
   Future auswahlAction(int index, BuildContext context) async {
-    await Navigator.of(context).pushNamed(
-      KioskShopScreen.routeName,
-      arguments: state.kinderList[index],
-    );
+    await Navigator.of(context)
+        .pushNamed(
+          KioskShopScreen.routeName,
+          arguments: state.kinderList[index],
+        )
+        .then(
+          (value) => updateView(),
+        );
   }
 }

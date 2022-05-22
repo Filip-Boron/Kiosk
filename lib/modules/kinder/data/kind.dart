@@ -22,11 +22,12 @@ class Kind {
 
   static Kind copy(Kind kind) {
     return Kind(
-        vorname: kind.vorname,
-        nachname: kind.nachname,
-        guthaben: kind.guthaben,
-        kommentar: kind.kommentar,
-        zelt: kind.zelt);
+      vorname: kind.vorname,
+      nachname: kind.nachname,
+      guthaben: kind.guthaben,
+      kommentar: kind.kommentar,
+      zelt: kind.zelt,
+    );
   }
 
   static Kind fromJson(Map<String, dynamic> json) {

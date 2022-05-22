@@ -21,6 +21,13 @@ class KioskKinderScrren extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(zelt.bezeichnung),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              //context.read<KioskKinderCubit>().updateView();
+              Navigator.of(context).pop();
+            },
+          ),
         ),
         body: BlocBuilder<KioskKinderCubit, KioskKinderState>(
           builder: (context, state) {

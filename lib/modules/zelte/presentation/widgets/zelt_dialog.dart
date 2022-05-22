@@ -8,6 +8,7 @@ class ZeltDialog extends StatelessWidget {
       : super(key: key) {
     if (zelt.nummer != 0) {
       _controller.text = zelt.nummer.toString();
+      zeltnummer = zelt.nummer;
     }
   }
 

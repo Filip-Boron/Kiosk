@@ -6,11 +6,11 @@ class KinderGrid extends StatelessWidget {
   const KinderGrid({
     Key? key,
     required this.kinderList,
-    required this.editAction,
+    required this.action,
   }) : super(key: key);
 
   final List<Kind> kinderList;
-  final Function(int, BuildContext) editAction;
+  final Function(int, BuildContext) action;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -94,7 +94,7 @@ class KinderGrid extends StatelessWidget {
               ],
             ),
             onTap: () {
-              editAction(index, context);
+              action(index, context);
             },
           ),
         );

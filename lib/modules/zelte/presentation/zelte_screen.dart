@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kiosk/constants/app_constants.dart';
 import 'package:kiosk/modules/app/widgets/custom_floating_button.dart';
 import 'package:kiosk/modules/drawer/custom_drawer.dart';
 import 'package:kiosk/modules/zelte/logic/zelte_cubit.dart';
@@ -25,15 +24,19 @@ class ZelteScreen extends StatelessWidget {
       ),
       body: BlocBuilder<ZelteCubit, ZelteState>(
         builder: (context, state) {
-          if (state is ZelteLoaded || state is ZelteEditing) {
+          if (state.status.isLoaded || state.status.isEditing) {
             return ZelteList(
               zeltList: state.zelteList,
-              editAction: context.read<ZelteCubit>().editAction,
+              action: context.read<ZelteCubit>().editAction,
+              icon: Icons.edit,
             );
-          } else if (state is ZelteLoading) {
-            return const Padding(
-              padding: EdgeInsets.all(paddingStandard),
+          } else if (state.status.isLoading) {
+            return const Center(
               child: CircularProgressIndicator(),
+            );
+          } else if (state.status.isEmpty) {
+            return const Center(
+              child: Text('keine Zelte vorhanden.'),
             );
           } else {
             return const Center(

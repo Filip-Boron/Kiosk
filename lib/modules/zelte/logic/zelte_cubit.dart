@@ -2,30 +2,35 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kiosk/modules/kiosk/logic/kiosk_cubit.dart';
 import 'package:kiosk/modules/zelte/data/zelt.dart';
 import 'package:kiosk/modules/zelte/logic/zelte_state.dart';
 import 'package:kiosk/modules/zelte/presentation/widgets/zelt_dialog.dart';
 
 class ZelteCubit extends Cubit<ZelteState> {
-  ZelteCubit() : super(ZelteInitial(zelteList: []));
+  ZelteCubit() : super(const ZelteState.initial());
 
-  Future<bool> fetchData() async {
-    emit(
-      ZelteLoading(zelteList: state.zelteList),
-    );
+  Future<bool> fetchData(BuildContext context) async {
+    emit(state.copyWith(status: ZelteStatus.loading));
+    context.read<KioskCubit>().dataIsLoading();
 
     //Fetch Data from Hive
 
-    emit(
-      ZelteLoaded(zelteList: state.zelteList),
-    );
+    List<Zelt> zelteList = [];
+
+    if (zelteList.isEmpty) {
+      emit(state.copyWith(status: ZelteStatus.empty, zelteList: []));
+      context.read<KioskCubit>().dataIsEmpty();
+      return true;
+    }
+
+    emit(state.copyWith(status: ZelteStatus.loaded, zelteList: []));
+    context.read<KioskCubit>().dataLoaded();
     return true;
   }
 
   Future addAction(BuildContext context) async {
-    emit(
-      ZelteEditing(zelteList: state.zelteList),
-    );
+    emit(state.copyWith(status: ZelteStatus.editing));
 
     final Zelt? zelt = await showDialog<Zelt>(
       context: context,
@@ -37,19 +42,19 @@ class ZelteCubit extends Cubit<ZelteState> {
         );
       },
     );
-
+    List<Zelt>? zelteList;
     if (zelt != null) {
-      state.zelteList.add(zelt);
+      zelteList = [...state.zelteList];
+      zelteList.add(zelt);
     }
     emit(
-      ZelteLoaded(zelteList: state.zelteList),
+      state.copyWith(status: ZelteStatus.loaded, zelteList: zelteList),
     );
+    context.read<KioskCubit>().dataLoaded();
   }
 
   Future editAction(int index, BuildContext context) async {
-    emit(
-      ZelteEditing(zelteList: state.zelteList),
-    );
+    emit(state.copyWith(status: ZelteStatus.editing));
 
     final Zelt editZelt = Zelt.copy(state.zelteList[index]);
 
@@ -64,11 +69,15 @@ class ZelteCubit extends Cubit<ZelteState> {
       },
     );
 
+    List<Zelt>? zelteList;
     if (zelt == null) {
-      state.zelteList[index] = Zelt.copy(editZelt);
+      zelteList = [...state.zelteList];
+      zelteList[index] = Zelt.copy(editZelt);
     }
-    emit(
-      ZelteLoaded(zelteList: state.zelteList),
-    );
+    emit(state.copyWith(status: ZelteStatus.loaded, zelteList: zelteList));
+  }
+
+  Zelt getZeltByIndex(int index) {
+    return state.zelteList[index];
   }
 }

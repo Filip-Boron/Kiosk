@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kiosk/constants/app_constants.dart';
 import 'package:kiosk/modules/app/widgets/custom_floating_button.dart';
 import 'package:kiosk/modules/drawer/custom_drawer.dart';
 import 'package:kiosk/modules/kinder/logic/kinder_cubit.dart';
@@ -28,11 +27,10 @@ class KinderScreen extends StatelessWidget {
           if (state is KinderLoaded || state is KinderEditing) {
             return KinderGrid(
               kinderList: state.kinderList,
-              editAction: context.read<KinderCubit>().editAction,
+              action: context.read<KinderCubit>().editAction,
             );
           } else if (state is KinderLoading) {
-            return const Padding(
-              padding: EdgeInsets.all(paddingStandard),
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else {

@@ -30,10 +30,12 @@ class KinderScreen extends StatelessWidget {
           BlocBuilder<KinderCubit, KinderState>(
             builder: (context, state) {
               if (state.status.isLoaded || state.status.isEditing) {
-                return KinderGrid(
-                  kinderList: state.kinderList,
-                  actionPrimary: context.read<KinderCubit>().editAction,
-                  actionSecondary: context.read<KinderCubit>().deleteAction,
+                return Expanded(
+                  child: KinderGrid(
+                    kinderList: state.kinderList,
+                    actionPrimary: context.read<KinderCubit>().editAction,
+                    actionSecondary: context.read<KinderCubit>().deleteAction,
+                  ),
                 );
               } else if (state.status.isLoading) {
                 return const Center(

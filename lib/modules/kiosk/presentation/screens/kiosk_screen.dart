@@ -4,7 +4,6 @@ import 'package:kiosk/modules/drawer/custom_drawer.dart';
 import 'package:kiosk/modules/kiosk/logic/kiosk_cubit.dart';
 import 'package:kiosk/modules/kiosk/logic/kiosk_state.dart';
 import 'package:kiosk/modules/zelte/logic/zelte_cubit.dart';
-import 'package:kiosk/modules/zelte/logic/zelte_state.dart';
 import 'package:kiosk/modules/zelte/presentation/widgets/zelte_list.dart';
 
 class KioskScreen extends StatelessWidget {
@@ -31,7 +30,8 @@ class KioskScreen extends StatelessWidget {
                 return ZelteList(
                   icon: Icons.arrow_forward,
                   zeltList: context.read<ZelteCubit>().state.zelteList,
-                  action: context.read<KioskCubit>().auswahlAction,
+                  actionPrimary: context.read<KioskCubit>().auswahlAction,
+                  actionSecondary: (index, context) {},
                 );
               } else if (state.status.isEmpty) {
                 return const Center(

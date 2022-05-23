@@ -57,7 +57,9 @@ class ShopInput extends StatelessWidget {
                 Icons.remove,
               ),
               onPressed: () {
-                context.read<KioskShopCubit>().subGuthaben(_subController.text);
+                context
+                    .read<KioskShopCubit>()
+                    .subGuthaben(_subController.text, context);
                 _subController.text = '';
               },
             ),
@@ -108,7 +110,9 @@ class ShopInput extends StatelessWidget {
                 Icons.add,
               ),
               onPressed: () {
-                context.read<KioskShopCubit>().addGuthaben(_addController.text);
+                context
+                    .read<KioskShopCubit>()
+                    .addGuthaben(_addController.text, context);
                 _addController.text = '';
               },
             ),

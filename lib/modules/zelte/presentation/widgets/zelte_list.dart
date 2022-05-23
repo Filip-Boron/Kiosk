@@ -6,12 +6,14 @@ class ZelteList extends StatelessWidget {
   const ZelteList({
     Key? key,
     required this.zeltList,
-    required this.action,
+    required this.actionPrimary,
     required this.icon,
+    required this.actionSecondary,
   }) : super(key: key);
 
   final List<Zelt> zeltList;
-  final Function(int, BuildContext) action;
+  final Function(int, BuildContext) actionPrimary;
+  final Function(int, BuildContext) actionSecondary;
   final IconData icon;
 
   @override
@@ -42,16 +44,17 @@ class ZelteList extends StatelessWidget {
               'Anzahl der Kinder: ${zeltList[index].kinderAnzahl}',
               style: Theme.of(context).textTheme.bodyText1,
             ),
-            trailing: IconButton(
-              icon: Icon(
-                icon,
-                color: Theme.of(context).colorScheme.secondary,
-                size: iconSizeStandard,
-              ),
-              onPressed: () {
-                action(index, context);
-              },
+            trailing: Icon(
+              icon,
+              color: Theme.of(context).colorScheme.secondary,
+              size: iconSizeStandard,
             ),
+            onTap: () {
+              actionPrimary(index, context);
+            },
+            onLongPress: () {
+              actionSecondary(index, context);
+            },
           ),
         );
       },

@@ -10,7 +10,14 @@ class KioskKinderCubit extends Cubit<KioskKinderState> {
   KioskKinderCubit() : super(const KioskKinderState.initial());
 
   void setZelt(Zelt zelt, BuildContext context) {
-    if (zelt.kinderAnzahl == 0) {
+    List<Kind> kinderZelt = context
+        .read<KinderCubit>()
+        .state
+        .kinderList
+        .where((element) => element.zelt?.nummer == zelt.nummer)
+        .toList();
+
+    if (kinderZelt.isEmpty) {
       emit(state.copyWith(
         status: KioskKinderStatus.empty,
         zelt: zelt,

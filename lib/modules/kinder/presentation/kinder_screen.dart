@@ -24,14 +24,19 @@ class KinderScreen extends StatelessWidget {
       ),
       body: BlocBuilder<KinderCubit, KinderState>(
         builder: (context, state) {
-          if (state is KinderLoaded || state is KinderEditing) {
+          if (state.status.isLoaded || state.status.isEditing) {
             return KinderGrid(
               kinderList: state.kinderList,
-              action: context.read<KinderCubit>().editAction,
+              actionPrimary: context.read<KinderCubit>().editAction,
+              actionSecondary: context.read<KinderCubit>().deleteAction,
             );
-          } else if (state is KinderLoading) {
+          } else if (state.status.isLoading) {
             return const Center(
               child: CircularProgressIndicator(),
+            );
+          } else if (state.status.isEmpty) {
+            return const Center(
+              child: Text('keine Kinder vorhanden.'),
             );
           } else {
             return const Center(

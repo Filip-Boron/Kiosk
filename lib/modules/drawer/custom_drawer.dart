@@ -52,13 +52,15 @@ class CustomDrawer extends StatelessWidget {
                 title: 'Kinder',
                 route: KinderScreen.routeName,
               ),
+              const Spacer(),
               ElevatedButton(
                 onPressed: () {
                   context.read<ZeltRepository>().clearData();
                   context.read<KindRepository>().clearData();
                 },
                 child: const Text('Datenlöschen'),
-              )
+              ),
+              const Text(version),
             ],
           ),
         ),

@@ -13,10 +13,7 @@ class CustomDrawerHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.shop_rounded,
-            size: iconSizeStandard,
-          ),
+          Image.asset('assets/logo.png'),
           const SizedBox(
             width: marginStandard,
           ),

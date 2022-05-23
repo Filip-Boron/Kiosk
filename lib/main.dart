@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kiosk/config/theme.dart';
@@ -15,13 +16,15 @@ import 'package:kiosk/modules/zelte/data/zelt_repository.dart';
 import 'package:kiosk/modules/zelte/logic/zelte_cubit.dart';
 import 'package:kiosk/modules/zelte/presentation/zelte_screen.dart';
 
-void main() async {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ZeltAdapter());
   Hive.registerAdapter(KindAdapter());
   await Hive.openBox<Zelt>('zelteBox');
   await Hive.openBox<Kind>('kindBox');
-  runApp(const MyApp());
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

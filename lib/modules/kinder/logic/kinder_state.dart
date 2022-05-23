@@ -12,18 +12,23 @@ extension KinderStatusX on KinderStatus {
 }
 
 class KinderState extends Equatable {
-  const KinderState({required this.kinderList, required this.status});
+  const KinderState(
+      {required this.kinderList, required this.status, required this.fullList});
   const KinderState.initial()
       : status = KinderStatus.initial,
-        kinderList = const [];
+        kinderList = const [],
+        fullList = const [];
 
   final List<Kind> kinderList;
   final KinderStatus status;
+  final List<Kind> fullList;
 
-  KinderState copyWith({List<Kind>? kinderList, KinderStatus? status}) {
+  KinderState copyWith(
+      {List<Kind>? kinderList, KinderStatus? status, List<Kind>? fullList}) {
     return KinderState(
       kinderList: kinderList ?? this.kinderList,
       status: status ?? this.status,
+      fullList: fullList ?? this.fullList,
     );
   }
 
@@ -31,5 +36,6 @@ class KinderState extends Equatable {
   List<Object?> get props => [
         kinderList,
         status,
+        fullList,
       ];
 }

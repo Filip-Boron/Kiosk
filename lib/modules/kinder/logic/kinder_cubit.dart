@@ -24,7 +24,10 @@ class KinderCubit extends Cubit<KinderState> {
       return true;
     }
 
-    emit(state.copyWith(status: KinderStatus.loaded, kinderList: kinderList));
+    emit(state.copyWith(
+        status: KinderStatus.loaded,
+        kinderList: kinderList,
+        fullList: kinderList));
     return true;
   }
 
@@ -56,7 +59,10 @@ class KinderCubit extends Cubit<KinderState> {
       }
       context.read<KindRepository>().add(kind);
     }
-    emit(state.copyWith(status: KinderStatus.loaded, kinderList: kinderList));
+    emit(state.copyWith(
+        status: KinderStatus.loaded,
+        kinderList: kinderList,
+        fullList: kinderList));
   }
 
   Future editAction(int index, BuildContext context) async {
@@ -93,7 +99,10 @@ class KinderCubit extends Cubit<KinderState> {
       context.read<KindRepository>().edit(editKind);
     }
 
-    emit(state.copyWith(status: KinderStatus.loaded, kinderList: kinderList));
+    emit(state.copyWith(
+        status: KinderStatus.loaded,
+        kinderList: kinderList,
+        fullList: kinderList));
   }
 
   Future deleteAction(int index, BuildContext context) async {
@@ -115,7 +124,10 @@ class KinderCubit extends Cubit<KinderState> {
       context.read<ZelteCubit>().subZelt(kind.zelt!.nummer, context);
     }
 
-    emit(state.copyWith(status: KinderStatus.loaded, kinderList: kinderList));
+    emit(state.copyWith(
+        status: KinderStatus.loaded,
+        kinderList: kinderList,
+        fullList: kinderList));
   }
 
   Future<bool?> _showDeleteDialog(BuildContext context) {
@@ -164,5 +176,20 @@ class KinderCubit extends Cubit<KinderState> {
 
   Kind getKindByIndex(int index) {
     return state.kinderList[index];
+  }
+
+  void searchKind(String query, BuildContext context) {
+    if (query.isEmpty) {
+      fetchData(context);
+    }
+
+    emit(state.copyWith(status: KinderStatus.editing));
+
+    List<Kind> kinderList = state.fullList
+        .where((kind) =>
+            kind.bezeichnung.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    emit(state.copyWith(status: KinderStatus.loaded, kinderList: kinderList));
   }
 }

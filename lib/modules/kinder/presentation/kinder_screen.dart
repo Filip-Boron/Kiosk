@@ -5,6 +5,7 @@ import 'package:kiosk/modules/drawer/custom_drawer.dart';
 import 'package:kiosk/modules/kinder/logic/kinder_cubit.dart';
 import 'package:kiosk/modules/kinder/logic/kinder_state.dart';
 import 'package:kiosk/modules/kinder/presentation/widgets/kinder_grid.dart';
+import 'package:kiosk/modules/kinder/presentation/widgets/kinder_searchbar.dart';
 
 class KinderScreen extends StatelessWidget {
   const KinderScreen({Key? key}) : super(key: key);
@@ -22,28 +23,34 @@ class KinderScreen extends StatelessWidget {
         icon: Icons.add,
         pressAction: context.read<KinderCubit>().addAction,
       ),
-      body: BlocBuilder<KinderCubit, KinderState>(
-        builder: (context, state) {
-          if (state.status.isLoaded || state.status.isEditing) {
-            return KinderGrid(
-              kinderList: state.kinderList,
-              actionPrimary: context.read<KinderCubit>().editAction,
-              actionSecondary: context.read<KinderCubit>().deleteAction,
-            );
-          } else if (state.status.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state.status.isEmpty) {
-            return const Center(
-              child: Text('keine Kinder vorhanden.'),
-            );
-          } else {
-            return const Center(
-              child: Text('etwas ist schief gelaufen..'),
-            );
-          }
-        },
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          KinderSearchbar(),
+          BlocBuilder<KinderCubit, KinderState>(
+            builder: (context, state) {
+              if (state.status.isLoaded || state.status.isEditing) {
+                return KinderGrid(
+                  kinderList: state.kinderList,
+                  actionPrimary: context.read<KinderCubit>().editAction,
+                  actionSecondary: context.read<KinderCubit>().deleteAction,
+                );
+              } else if (state.status.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state.status.isEmpty) {
+                return const Center(
+                  child: Text('keine Kinder vorhanden.'),
+                );
+              } else {
+                return const Center(
+                  child: Text('etwas ist schief gelaufen..'),
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }

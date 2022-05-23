@@ -5,12 +5,11 @@ import 'package:kiosk/modules/kinder/data/kind.dart';
 import 'package:kiosk/modules/kinder/presentation/widgets/kinder_form_dialog.dart';
 
 class KinderDialog extends StatelessWidget {
-  KinderDialog({Key? key, required this.titel, this.kind}) : super(key: key) {
-    kind ??= Kind(vorname: '', nachname: '');
-  }
+  KinderDialog({Key? key, required this.titel, required this.kind})
+      : super(key: key);
 
   final String titel;
-  Kind? kind;
+  Kind kind;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class KinderDialog extends StatelessWidget {
             height: marginStandard,
           ),
           KinderFormDialog(
-            kind: kind ??= Kind(vorname: '', nachname: ''),
+            kind: kind,
           ),
         ],
       ),
@@ -61,19 +60,14 @@ class KinderDialog extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            if (kind == null) {
-              Fluttertoast.showToast(
-                  msg: 'Fehler bei der Erstellung.',
-                  toastLength: Toast.LENGTH_LONG);
-              return;
-            } else if (kind!.vorname.isEmpty || kind!.nachname.isEmpty) {
+            if (kind.vorname.isEmpty || kind.nachname.isEmpty) {
               Fluttertoast.showToast(
                   msg: 'Vorname und Nachname müssen ausgefüllt sein.',
                   toastLength: Toast.LENGTH_LONG);
               return;
             }
-            if (kind!.guthaben != null) {
-              if (kind!.guthaben == -1) {
+            if (kind.guthaben != null) {
+              if (kind.guthaben == -1) {
                 Fluttertoast.showToast(
                     msg: 'Ungültiges Guthaben.',
                     toastLength: Toast.LENGTH_LONG);

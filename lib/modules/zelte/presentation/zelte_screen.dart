@@ -27,8 +27,9 @@ class ZelteScreen extends StatelessWidget {
           if (state.status.isLoaded || state.status.isEditing) {
             return ZelteList(
               zeltList: state.zelteList,
-              action: context.read<ZelteCubit>().editAction,
               icon: Icons.edit,
+              actionPrimary: context.read<ZelteCubit>().editAction,
+              actionSecondary: context.read<ZelteCubit>().deleteAction,
             );
           } else if (state.status.isLoading) {
             return const Center(

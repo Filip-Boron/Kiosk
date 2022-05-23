@@ -6,7 +6,7 @@ import 'package:kiosk/modules/zelte/data/zelt.dart';
 class ZeltDialog extends StatelessWidget {
   ZeltDialog({Key? key, required this.titel, required this.zelt})
       : super(key: key) {
-    if (zelt.nummer != 0) {
+    if (zelt.nummer >= 0) {
       _controller.text = zelt.nummer.toString();
       zeltnummer = zelt.nummer;
     }

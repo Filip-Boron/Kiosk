@@ -1,7 +1,9 @@
-import 'dart:convert';
-
+import 'package:hive/hive.dart';
 import 'package:kiosk/modules/zelte/data/zelt.dart';
 
+part 'kind.g.dart';
+
+@HiveType(typeId: 1)
 class Kind {
   Kind({
     required this.vorname,
@@ -9,16 +11,20 @@ class Kind {
     this.zelt,
     this.guthaben,
     this.kommentar,
+    required this.dbkey,
   });
+  @HiveField(0)
   String vorname;
+  @HiveField(1)
   String nachname;
+  @HiveField(2)
   Zelt? zelt;
+  @HiveField(3)
   double? guthaben;
+  @HiveField(4)
   String? kommentar;
-
-  void setZelt(Zelt zelt) {
-    this.zelt = Zelt(nummer: zelt.nummer, kinderAnzahl: zelt.kinderAnzahl);
-  }
+  @HiveField(5)
+  String dbkey;
 
   static Kind copy(Kind kind) {
     return Kind(
@@ -27,26 +33,7 @@ class Kind {
       guthaben: kind.guthaben,
       kommentar: kind.kommentar,
       zelt: kind.zelt,
+      dbkey: kind.dbkey,
     );
-  }
-
-  static Kind fromJson(Map<String, dynamic> json) {
-    return Kind(
-      vorname: json['vorname'] as String,
-      nachname: json['nachname'] as String,
-      zelt: json['zelt'] as Zelt,
-      guthaben: json['guthaben'] as double,
-      kommentar: json['kommentar'] as String,
-    );
-  }
-
-  String toJson() {
-    return jsonEncode({
-      'vorname': vorname,
-      'nachname': nachname,
-      'zelt': zelt,
-      'guthaben': guthaben,
-      'kommentar': kommentar,
-    });
   }
 }

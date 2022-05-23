@@ -6,11 +6,13 @@ class KinderGrid extends StatelessWidget {
   const KinderGrid({
     Key? key,
     required this.kinderList,
-    required this.action,
+    required this.actionPrimary,
+    required this.actionSecondary,
   }) : super(key: key);
 
   final List<Kind> kinderList;
-  final Function(int, BuildContext) action;
+  final Function(int, BuildContext) actionPrimary;
+  final Function(int, BuildContext) actionSecondary;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -94,7 +96,10 @@ class KinderGrid extends StatelessWidget {
               ],
             ),
             onTap: () {
-              action(index, context);
+              actionPrimary(index, context);
+            },
+            onLongPress: () {
+              actionSecondary(index, context);
             },
           ),
         );

@@ -1,15 +1,21 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 
+part 'zelt.g.dart';
+
+@HiveType(typeId: 0)
 class Zelt extends Equatable {
-  Zelt({required this.nummer, this.kinderAnzahl = 0}) {
+  Zelt({required this.nummer, this.kinderAnzahl = 0, required this.dbKey}) {
     bezeichnung = 'Zelt $nummer';
   }
-
+  @HiveField(0)
   int nummer;
+  @HiveField(1)
   String bezeichnung = '';
+  @HiveField(2)
   int kinderAnzahl;
+  @HiveField(3)
+  String dbKey;
 
   void addKind() {
     kinderAnzahl++;
@@ -28,21 +34,11 @@ class Zelt extends Equatable {
   }
 
   static Zelt copy(Zelt zelt) {
-    return Zelt(nummer: zelt.nummer, kinderAnzahl: zelt.kinderAnzahl);
-  }
-
-  static Zelt fromJson(Map<String, dynamic> json) {
     return Zelt(
-      nummer: json['nummer'] as int,
-      kinderAnzahl: json['kinderAnzahl'] as int,
+      nummer: zelt.nummer,
+      kinderAnzahl: zelt.kinderAnzahl,
+      dbKey: zelt.dbKey,
     );
-  }
-
-  String toJson() {
-    return jsonEncode({
-      'nummer': nummer,
-      'kinderAnzahl': kinderAnzahl,
-    });
   }
 
   @override

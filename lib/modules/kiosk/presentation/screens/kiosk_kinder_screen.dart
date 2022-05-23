@@ -34,7 +34,8 @@ class KioskKinderScrren extends StatelessWidget {
             if (state.status.isLoaded) {
               return KinderGrid(
                 kinderList: state.kinderList,
-                action: context.read<KioskKinderCubit>().auswahlAction,
+                actionPrimary: context.read<KioskKinderCubit>().auswahlAction,
+                actionSecondary: (index, context) {},
               );
             } else if (state.status.isEmpty) {
               return const Center(

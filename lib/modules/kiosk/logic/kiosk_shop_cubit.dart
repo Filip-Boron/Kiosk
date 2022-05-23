@@ -1,6 +1,9 @@
+// ignore_for_file: omit_local_variable_types
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kiosk/modules/kinder/data/kind.dart';
+import 'package:kiosk/modules/kinder/data/kind_repository.dart';
 import 'package:kiosk/modules/kiosk/logic/kiosk_shop_state.dart';
 
 class KioskShopCubit extends Cubit<KioskShopState> {
@@ -10,7 +13,7 @@ class KioskShopCubit extends Cubit<KioskShopState> {
     emit(state.copyWith(status: KioskShopStatus.loaded, kind: kind));
   }
 
-  void subGuthaben(String input) {
+  void subGuthaben(String input, BuildContext context) {
     if (input.isEmpty) {
       Fluttertoast.showToast(msg: 'Betrag darf nicht leer sein.');
       return;
@@ -26,7 +29,7 @@ class KioskShopCubit extends Cubit<KioskShopState> {
     try {
       final double doubleInput = double.parse(input);
 
-      Kind? kind = state.kind;
+      final Kind? kind = state.kind;
 
       if (kind == null) {
         Fluttertoast.showToast(
@@ -38,6 +41,7 @@ class KioskShopCubit extends Cubit<KioskShopState> {
 
       kind.guthaben = kind.guthaben! - doubleInput;
 
+      context.read<KindRepository>().edit(kind);
       emit(state.copyWith(status: KioskShopStatus.loaded, kind: kind));
     } catch (e) {
       Fluttertoast.showToast(
@@ -48,7 +52,7 @@ class KioskShopCubit extends Cubit<KioskShopState> {
     }
   }
 
-  void addGuthaben(String input) {
+  void addGuthaben(String input, BuildContext context) {
     if (input.isEmpty) {
       Fluttertoast.showToast(msg: 'Betrag darf nicht leer sein.');
       return;
@@ -64,7 +68,7 @@ class KioskShopCubit extends Cubit<KioskShopState> {
     try {
       final double doubleInput = double.parse(input);
 
-      Kind? kind = state.kind;
+      final Kind? kind = state.kind;
 
       if (kind == null) {
         Fluttertoast.showToast(
@@ -76,6 +80,7 @@ class KioskShopCubit extends Cubit<KioskShopState> {
 
       kind.guthaben = kind.guthaben! + doubleInput;
 
+      context.read<KindRepository>().edit(kind);
       emit(state.copyWith(status: KioskShopStatus.loaded, kind: kind));
     } catch (e) {
       Fluttertoast.showToast(

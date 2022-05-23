@@ -17,7 +17,10 @@ class KinderCubit extends Cubit<KinderState> {
     emit(state.copyWith(status: KinderStatus.loading));
 
     //Fetch Data from Hive
-    final List<Kind> kinderList = context.read<KindRepository>().getAllData();
+    final List<Kind> kinderList = context.read<KindRepository>().getAllData()
+      ..sort((a, b) {
+        return a.nachname.toLowerCase().compareTo(b.nachname.toLowerCase());
+      });
 
     if (kinderList.isEmpty) {
       emit(state.copyWith(status: KinderStatus.empty, kinderList: []));

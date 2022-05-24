@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kiosk/modules/app/widgets/c_alter_dialog.dart';
-import 'package:kiosk/modules/kinder/data/kind_repository.dart';
 import 'package:kiosk/modules/kinder/logic/kinder_cubit.dart';
 import 'package:kiosk/modules/kiosk/logic/kiosk_cubit.dart';
 import 'package:kiosk/modules/zelte/data/zelt.dart';
@@ -20,7 +19,12 @@ class ZelteCubit extends Cubit<ZelteState> {
     context.read<KioskCubit>().dataIsLoading();
 
     //Fetch Data from Hive
-    List<Zelt> zelteList = context.read<ZeltRepository>().getAllData();
+    List<Zelt> zelteList = context.read<ZeltRepository>().getAllData()
+      ..sort(
+        (a, b) {
+          return a.nummer.compareTo(b.nummer);
+        },
+      );
 
     if (zelteList.isEmpty) {
       emit(state.copyWith(status: ZelteStatus.empty, zelteList: []));

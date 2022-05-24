@@ -69,7 +69,7 @@ class KinderGrid extends StatelessWidget {
                         width: 8,
                       ),
                       Text(
-                        '${kinderList[index].guthaben ?? ''}',
+                        '${kinderList[index].guthaben?.toStringAsFixed(2) ?? ''}',
                         style: Theme.of(context).textTheme.headline6,
                       ),
                     ],

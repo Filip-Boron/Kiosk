@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
 class CustomListTitle extends StatelessWidget {
-  const CustomListTitle({
+  CustomListTitle({
     Key? key,
     required this.icon,
     required this.title,
     required this.route,
+    this.fontSize,
   }) : super(key: key);
 
   final IconData icon;
   final String title;
   final String route;
+  double? fontSize;
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -24,7 +27,12 @@ class CustomListTitle extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: Theme.of(context).textTheme.headline4,
+          style: fontSize == null
+              ? Theme.of(context).textTheme.headline4
+              : Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(fontSize: fontSize),
         ),
         onTap: () {
           Navigator.of(context).pushReplacementNamed(route);

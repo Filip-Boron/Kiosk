@@ -26,6 +26,10 @@ class Kind {
   @HiveField(5)
   String dbkey;
 
+  String get bezeichnung {
+    return '$vorname $nachname';
+  }
+
   static Kind copy(Kind kind) {
     return Kind(
       vorname: kind.vorname,

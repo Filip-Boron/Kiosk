@@ -12,7 +12,7 @@ class KinderFormDialog extends StatelessWidget {
     _nachnameController.text = kind.nachname;
     kind.guthaben == null
         ? _guthabenController.text = ''
-        : _guthabenController.text = kind.guthaben.toString();
+        : _guthabenController.text = kind.guthaben!.toStringAsFixed(2);
     kind.zelt != null ? _zeltController = kind.zelt : _zeltController = null;
 
     _kommentarController.text = kind.kommentar ?? '';
@@ -122,7 +122,8 @@ class KinderFormDialog extends StatelessWidget {
                 return;
               } else if (double.tryParse(input) == null) {
                 Fluttertoast.showToast(
-                  msg: 'Das Guthaben darf nur aus Zahlen bestehen.',
+                  msg:
+                      'Das Guthaben darf nur aus Zahlen oder einem Punkt bestehen.',
                   toastLength: Toast.LENGTH_SHORT,
                 );
                 kind.guthaben = -1;
@@ -175,7 +176,7 @@ class KinderFormDialog extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.5,
             child: TextField(
               decoration: InputDecoration(
-                labelText: 'Kommentar',
+                labelText: 'Anmerkung',
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: Theme.of(context).colorScheme.secondary,

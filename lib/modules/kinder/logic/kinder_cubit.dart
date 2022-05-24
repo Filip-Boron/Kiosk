@@ -17,14 +17,20 @@ class KinderCubit extends Cubit<KinderState> {
     emit(state.copyWith(status: KinderStatus.loading));
 
     //Fetch Data from Hive
-    final List<Kind> kinderList = context.read<KindRepository>().getAllData();
+    final List<Kind> kinderList = context.read<KindRepository>().getAllData()
+      ..sort((a, b) {
+        return a.vorname.toLowerCase().compareTo(b.vorname.toLowerCase());
+      });
 
     if (kinderList.isEmpty) {
       emit(state.copyWith(status: KinderStatus.empty, kinderList: []));
       return true;
     }
 
-    emit(state.copyWith(status: KinderStatus.loaded, kinderList: kinderList));
+    emit(state.copyWith(
+        status: KinderStatus.loaded,
+        kinderList: kinderList,
+        fullList: kinderList));
     return true;
   }
 
@@ -56,7 +62,10 @@ class KinderCubit extends Cubit<KinderState> {
       }
       context.read<KindRepository>().add(kind);
     }
-    emit(state.copyWith(status: KinderStatus.loaded, kinderList: kinderList));
+    emit(state.copyWith(
+        status: KinderStatus.loaded,
+        kinderList: kinderList,
+        fullList: kinderList));
   }
 
   Future editAction(int index, BuildContext context) async {
@@ -93,7 +102,10 @@ class KinderCubit extends Cubit<KinderState> {
       context.read<KindRepository>().edit(editKind);
     }
 
-    emit(state.copyWith(status: KinderStatus.loaded, kinderList: kinderList));
+    emit(state.copyWith(
+        status: KinderStatus.loaded,
+        kinderList: kinderList,
+        fullList: kinderList));
   }
 
   Future deleteAction(int index, BuildContext context) async {
@@ -115,7 +127,10 @@ class KinderCubit extends Cubit<KinderState> {
       context.read<ZelteCubit>().subZelt(kind.zelt!.nummer, context);
     }
 
-    emit(state.copyWith(status: KinderStatus.loaded, kinderList: kinderList));
+    emit(state.copyWith(
+        status: KinderStatus.loaded,
+        kinderList: kinderList,
+        fullList: kinderList));
   }
 
   Future<bool?> _showDeleteDialog(BuildContext context) {
@@ -164,5 +179,20 @@ class KinderCubit extends Cubit<KinderState> {
 
   Kind getKindByIndex(int index) {
     return state.kinderList[index];
+  }
+
+  void searchKind(String query, BuildContext context) {
+    if (query.isEmpty) {
+      fetchData(context);
+    }
+
+    emit(state.copyWith(status: KinderStatus.editing));
+
+    List<Kind> kinderList = state.fullList
+        .where((kind) =>
+            kind.bezeichnung.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    emit(state.copyWith(status: KinderStatus.loaded, kinderList: kinderList));
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const String version = 'v0.14.0';
+
 const double iconSizeStandard = 40;
 const double paddingStandard = 20;
 const double marginStandard = 20;

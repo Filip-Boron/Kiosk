@@ -24,7 +24,7 @@ class ShopKinderInfo extends StatelessWidget {
             BlocBuilder<KioskShopCubit, KioskShopState>(
               builder: (context, state) {
                 return Text(
-                  kind.guthaben.toString(),
+                  kind.guthaben?.toStringAsFixed(2) ?? '',
                   style: Theme.of(context).textTheme.headline4,
                 );
               },

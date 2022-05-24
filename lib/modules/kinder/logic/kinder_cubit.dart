@@ -19,7 +19,7 @@ class KinderCubit extends Cubit<KinderState> {
     //Fetch Data from Hive
     final List<Kind> kinderList = context.read<KindRepository>().getAllData()
       ..sort((a, b) {
-        return a.nachname.toLowerCase().compareTo(b.nachname.toLowerCase());
+        return a.vorname.toLowerCase().compareTo(b.vorname.toLowerCase());
       });
 
     if (kinderList.isEmpty) {

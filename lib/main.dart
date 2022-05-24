@@ -11,6 +11,7 @@ import 'package:kiosk/modules/kiosk/logic/kiosk_cubit.dart';
 import 'package:kiosk/modules/kiosk/presentation/screens/kiosk_kinder_screen.dart';
 import 'package:kiosk/modules/kiosk/presentation/screens/kiosk_screen.dart';
 import 'package:kiosk/modules/kiosk/presentation/screens/kiosk_shop_screen.dart';
+import 'package:kiosk/modules/settings/presentation/settings_screen.dart';
 import 'package:kiosk/modules/zelte/data/zelt.dart';
 import 'package:kiosk/modules/zelte/data/zelt_repository.dart';
 import 'package:kiosk/modules/zelte/logic/zelte_cubit.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
             KinderScreen.routeName: (ctx) => const KinderScreen(),
             KioskKinderScrren.routeName: (ctx) => const KioskKinderScrren(),
             KioskShopScreen.routeName: (ctx) => const KioskShopScreen(),
+            StettingsScreen.routeName: (ctx) => const StettingsScreen(),
           },
         ),
       ),

@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:kiosk/constants/app_constants.dart';
 import 'package:kiosk/modules/drawer/custom_drawer_header.dart';
 import 'package:kiosk/modules/drawer/custom_list_tile.dart';
-import 'package:kiosk/modules/kinder/data/kind_repository.dart';
 import 'package:kiosk/modules/kinder/presentation/kinder_screen.dart';
 import 'package:kiosk/modules/kiosk/presentation/screens/kiosk_screen.dart';
-import 'package:kiosk/modules/zelte/data/zelt_repository.dart';
+import 'package:kiosk/modules/settings/presentation/settings_screen.dart';
 import 'package:kiosk/modules/zelte/presentation/zelte_screen.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({Key? key}) : super(key: key);
@@ -37,28 +35,27 @@ class CustomDrawer extends StatelessWidget {
                 color: Colors.black,
               ),
               const SizedBox(height: marginStandard),
-              const CustomListTitle(
+              CustomListTitle(
                 icon: Icons.home,
-                title: 'Startseite',
+                title: 'Kiosk',
                 route: KioskScreen.routeName,
               ),
-              const CustomListTitle(
+              CustomListTitle(
                 icon: zeltIcon,
                 title: 'Zelte',
                 route: ZelteScreen.routeName,
               ),
-              const CustomListTitle(
+              CustomListTitle(
                 icon: Icons.account_circle,
                 title: 'Kinder',
                 route: KinderScreen.routeName,
               ),
               const Spacer(),
-              ElevatedButton(
-                onPressed: () {
-                  context.read<ZeltRepository>().clearData();
-                  context.read<KindRepository>().clearData();
-                },
-                child: const Text('Datenlöschen'),
+              CustomListTitle(
+                icon: Icons.settings,
+                title: 'Einstellungen',
+                route: StettingsScreen.routeName,
+                fontSize: 24,
               ),
               const Text(version),
             ],

@@ -34,7 +34,7 @@ class KioskShopScreen extends StatelessWidget {
             children: [
               ShopKinderInfo(kind: kind),
               const SizedBox(height: marginStandard * 2),
-              ShopInput(),
+              Expanded(child: ShopInput()),
             ],
           ),
         ),

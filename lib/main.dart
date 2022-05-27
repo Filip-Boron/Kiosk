@@ -18,14 +18,16 @@ import 'package:kiosk/modules/zelte/logic/zelte_cubit.dart';
 import 'package:kiosk/modules/zelte/presentation/zelte_screen.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  //WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ZeltAdapter());
   Hive.registerAdapter(KindAdapter());
   await Hive.openBox<Zelt>('zelteBox');
   await Hive.openBox<Kind>('kindBox');
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((value) => runApp(const MyApp()));
+/*   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(const MyApp())); */
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

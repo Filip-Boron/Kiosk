@@ -19,8 +19,14 @@ class KinderGrid extends StatelessWidget {
       padding: const EdgeInsets.only(top: paddingStandard),
       itemCount: kinderList.length,
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: MediaQuery.of(context).size.width / 3,
-        mainAxisExtent: (MediaQuery.of(context).size.height) / 6,
+        maxCrossAxisExtent:
+            MediaQuery.of(context).orientation == Orientation.portrait
+                ? MediaQuery.of(context).size.width / 3
+                : MediaQuery.of(context).size.width / 5,
+        mainAxisExtent:
+            MediaQuery.of(context).orientation == Orientation.portrait
+                ? MediaQuery.of(context).size.height / 6
+                : MediaQuery.of(context).size.height / 4,
       ),
       itemBuilder: (context, index) {
         return Card(

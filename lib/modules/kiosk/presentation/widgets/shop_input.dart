@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kiosk/constants/app_constants.dart';
 import 'package:kiosk/modules/kiosk/logic/kiosk_shop_cubit.dart';
+import 'package:kiosk/modules/kiosk/presentation/widgets/shop_betrag.dart';
 
 class ShopInput extends StatelessWidget {
   ShopInput({Key? key}) : super(key: key);
@@ -117,6 +118,15 @@ class ShopInput extends StatelessWidget {
               },
             ),
           ],
+        ),
+        const SizedBox(
+          height: marginStandard,
+        ),
+        Expanded(
+          child: ShopBetrag(
+            subController: _subController,
+            betragList: betragList,
+          ),
         ),
       ],
     );

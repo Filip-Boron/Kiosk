@@ -29,4 +29,4 @@ final TextStyle lightAppBarTitel = ThemeData.light()
 
 const IconData zeltIcon = Icons.festival;
 
-const List<double> betragList = [0.05, 0.10, 0.50, 1.00, 1.50, 2];
+const List<double> betragList = [ 0.10, 0.50, 1.00, 1.50, 2];

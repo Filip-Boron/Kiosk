@@ -23,15 +23,34 @@ class KinderCubit extends Cubit<KinderState> {
       });
 
     if (kinderList.isEmpty) {
-      emit(state.copyWith(status: KinderStatus.empty, kinderList: []));
+      emit(
+        state.copyWith(
+          status: KinderStatus.empty,
+          kinderList: [],
+          fullList: [],
+        ),
+      );
       return true;
     }
 
-    emit(state.copyWith(
+    emit(
+      state.copyWith(
         status: KinderStatus.loaded,
         kinderList: kinderList,
-        fullList: kinderList));
+        fullList: kinderList,
+      ),
+    );
     return true;
+  }
+
+  void setFullList() {
+    final List<Kind> kinderList = [...state.fullList];
+    emit(
+      state.copyWith(
+        status: KinderStatus.loaded,
+        kinderList: kinderList,
+      ),
+    );
   }
 
   Future addAction(BuildContext context) async {

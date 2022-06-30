@@ -14,6 +14,7 @@ class KinderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<KinderCubit>().setFullList();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kinder'),

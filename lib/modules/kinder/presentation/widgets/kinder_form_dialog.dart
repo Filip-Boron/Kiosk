@@ -48,6 +48,7 @@ class KinderFormDialog extends StatelessWidget {
               ),
             ),
             cursorColor: Theme.of(context).colorScheme.secondary,
+            textCapitalization: TextCapitalization.sentences,
             controller: _vornameController,
             onChanged: (input) {
               kind.vorname = input;
@@ -82,6 +83,7 @@ class KinderFormDialog extends StatelessWidget {
               ),
             ),
             cursorColor: Theme.of(context).colorScheme.secondary,
+            textCapitalization: TextCapitalization.sentences,
             controller: _nachnameController,
             onChanged: (input) {
               kind.nachname = input;

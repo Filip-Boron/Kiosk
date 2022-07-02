@@ -13,7 +13,7 @@ class CustomDrawerHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/logo.png'),
+          Image.asset(logoString),
           const SizedBox(
             width: marginStandard,
           ),

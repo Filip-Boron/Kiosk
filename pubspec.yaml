@@ -62,7 +62,7 @@ dev_dependencies:
 
 flutter_icons:
   ios: true
-  image_path: "assets/LogoHila.jpg"
+  image_path: "assets/nkIcon.jpg"
 # The following section is specific to Flutter.
 flutter:
 
@@ -76,6 +76,7 @@ flutter:
      - assets/logo.png
      - assets/ic_logo.png
      - assets/LogoHila.jpg
+     - assets/logoNk.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String version = 'v0.15.0';
+const String version = 'v0.15.4';
 
 const double iconSizeStandard = 40;
 const double paddingStandard = 20;
@@ -29,4 +29,6 @@ final TextStyle lightAppBarTitel = ThemeData.light()
 
 const IconData zeltIcon = Icons.festival;
 
-const List<double> betragList = [ 0.10, 0.50, 1.00, 1.50, 2];
+const List<double> betragList = [0.10, 0.50, 1.00, 1.50, 2];
+
+const String logoString = 'assets/logoNk.png';

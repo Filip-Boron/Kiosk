@@ -12,6 +12,7 @@ class Kind {
     this.guthaben,
     this.kommentar,
     required this.dbkey,
+    this.lastVisit,
   });
   @HiveField(0)
   String vorname;
@@ -25,6 +26,8 @@ class Kind {
   String? kommentar;
   @HiveField(5)
   String dbkey;
+  @HiveField(6)
+  String? lastVisit;
 
   String get bezeichnung {
     return '$vorname $nachname';
@@ -38,6 +41,7 @@ class Kind {
       kommentar: kind.kommentar,
       zelt: kind.zelt,
       dbkey: kind.dbkey,
+      lastVisit: kind.lastVisit,
     );
   }
 }

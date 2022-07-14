@@ -23,9 +23,20 @@ class ShopKinderInfo extends StatelessWidget {
             const SizedBox(width: marginStandard / 2),
             BlocBuilder<KioskShopCubit, KioskShopState>(
               builder: (context, state) {
-                return Text(
-                  kind.guthaben?.toStringAsFixed(2) ?? '',
-                  style: Theme.of(context).textTheme.headline4,
+                return Expanded(
+                  child: Row(
+                    children: [
+                      Text(
+                        kind.guthaben?.toStringAsFixed(2) ?? '',
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                      const Spacer(),
+                      Text(
+                        kind.lastVisit ?? '',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ],
+                  ),
                 );
               },
             ),

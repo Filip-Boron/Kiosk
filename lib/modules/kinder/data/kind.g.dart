@@ -23,13 +23,14 @@ class KindAdapter extends TypeAdapter<Kind> {
       guthaben: fields[3] as double?,
       kommentar: fields[4] as String?,
       dbkey: fields[5] as String,
+      lastVisit: fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Kind obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.vorname)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class KindAdapter extends TypeAdapter<Kind> {
       ..writeByte(4)
       ..write(obj.kommentar)
       ..writeByte(5)
-      ..write(obj.dbkey);
+      ..write(obj.dbkey)
+      ..writeByte(6)
+      ..write(obj.lastVisit);
   }
 
   @override

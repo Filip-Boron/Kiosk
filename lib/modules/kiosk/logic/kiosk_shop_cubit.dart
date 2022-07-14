@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kiosk/modules/kinder/data/kind.dart';
 import 'package:kiosk/modules/kinder/data/kind_repository.dart';
 import 'package:kiosk/modules/kiosk/logic/kiosk_shop_state.dart';
+import 'package:intl/intl.dart';
 
 class KioskShopCubit extends Cubit<KioskShopState> {
   KioskShopCubit() : super(const KioskShopState.initial());
@@ -40,6 +41,7 @@ class KioskShopCubit extends Cubit<KioskShopState> {
       }
 
       kind.guthaben = kind.guthaben! - doubleInput;
+      kind.lastVisit = DateFormat('dd.MM.y - HH:mm').format(DateTime.now());
 
       context.read<KindRepository>().edit(kind);
       emit(state.copyWith(status: KioskShopStatus.loaded, kind: kind));
